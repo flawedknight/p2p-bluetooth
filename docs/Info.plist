@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>local.p2p.bluetooth.mesh</string>
+    <key>CFBundleName</key>
+    <string>P2P Bluetooth SOS Mesh</string>
+    <key>CFBundleDisplayName</key>
+    <string>P2P Bluetooth SOS Mesh</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.15</string>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>This app uses Bluetooth to advertise and relay SOS messages with nearby devices.</string>
+</dict>
+</plist>

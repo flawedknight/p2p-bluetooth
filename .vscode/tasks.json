@@ -1,0 +1,36 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build macOS Bluetooth SOS app",
+			"type": "shell",
+			"command": "mkdir -p build/macos_mesh_demo.app/Contents/MacOS && xcrun",
+			"args": [
+				"clang++",
+				"-std=c++17",
+				"-Wall",
+				"-Wextra",
+				"-Werror",
+				"-pedantic",
+				"-fobjc-arc",
+				"-isysroot",
+				"/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+				"-Iinclude",
+				"-Isrc/platform",
+				"src/mesh.cpp",
+				"src/platform/macos_ble_transport.mm",
+				"apps/macos_mesh_demo_main.mm",
+				"-framework",
+				"Foundation",
+				"-framework",
+				"CoreBluetooth",
+				"-o",
+				"build/macos_mesh_demo.app/Contents/MacOS/macos_mesh_demo"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gcc"
+			]
+		}
+	]
+}

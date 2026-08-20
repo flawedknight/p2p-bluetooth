@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug macOS Bluetooth SOS app",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/krustylys/p2p-bluetooth",
+      "program": "/Users/krustylys/p2p-bluetooth/build/macos_mesh_demo.app/Contents/MacOS/macos_mesh_demo"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/krustylys/p2p-bluetooth",
+      "program": "/Users/krustylys/p2p-bluetooth/build/Debug/outDebug"
+    }
+  ]
+}

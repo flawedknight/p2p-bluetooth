@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1720">
+  <title>SOS Mesh Console</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">SOS</div>
+      <div>
+        <p class="kicker">P2P Bluetooth mesh</p>
+        <h1>Emergency relay console</h1>
+      </div>
+      <div class="connection" aria-label="Simulation status">
+        <span class="pulse"></span>
+        <span>Simulator</span>
+      </div>
+    </header>
+
+    <section class="status-strip" aria-label="Node status">
+      <div><span class="status-label">NODE</span><strong id="nodeId">MOBILE-07</strong></div>
+      <div><span class="status-label">SERVICE</span><strong>7f7d...4553</strong></div>
+      <div><span class="status-label">RELAY CACHE</span><strong id="cacheCount">0 packets</strong></div>
+    </section>
+
+    <section class="workspace">
+      <section class="panel sos-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Originating device</p>
+            <h2>Send an SOS</h2>
+          </div>
+          <span class="signal-icon" aria-hidden="true">↗</span>
+        </div>
+        <p class="muted">Create a packet for nearby phones to receive and relay.</p>
+        <form id="sosForm">
+          <label for="message">Message</label>
+          <textarea id="message" maxlength="180" required>Need emergency assistance</textarea>
+          <div class="form-row">
+            <label for="ttl">Relay hops</label>
+            <input id="ttl" type="number" min="0" max="127" value="3" required>
+            <span class="field-note">TTL</span>
+          </div>
+          <button class="sos-button" type="submit"><span aria-hidden="true">!</span> Broadcast SOS</button>
+        </form>
+        <p class="fine-print">The simulator mirrors the C++ packet format: 4-byte message ID, 1-byte TTL, then payload.</p>
+      </section>
+
+      <section class="panel packet-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">BLE characteristic payload</p>
+            <h2>Last packet</h2>
+          </div>
+          <span id="packetState" class="badge">Waiting</span>
+        </div>
+        <div class="packet-readout">
+          <span class="readout-label">HEX</span>
+          <code id="packetHex">No packet broadcast yet</code>
+        </div>
+        <dl class="packet-details">
+          <div><dt>Message ID</dt><dd id="packetId">—</dd></div>
+          <div><dt>TTL</dt><dd id="packetTtl">—</dd></div>
+          <div><dt>Payload bytes</dt><dd id="packetBytes">—</dd></div>
+        </dl>
+        <button id="copyButton" class="quiet-button" type="button" disabled>Copy packet hex</button>
+      </section>
+    </section>
+
+    <section class="lower-grid">
+      <section class="panel scan-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Nearby device</p>
+            <h2>Simulate scan result</h2>
+          </div>
+          <span class="scan-mark" aria-hidden="true">⌁</span>
+        </div>
+        <p class="muted">Paste a packet received from another mobile node.</p>
+        <label for="scanHex">Packet hex</label>
+        <textarea id="scanHex" class="hex-input" spellcheck="false" placeholder="0000002a024e6565642068656c70"></textarea>
+        <div class="button-row">
+          <button id="injectButton" class="secondary-button" type="button">Inject scan</button>
+          <button id="sampleButton" class="text-button" type="button">Use sample</button>
+        </div>
+      </section>
+
+      <section class="panel activity-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Live timeline</p>
+            <h2>Mesh activity</h2>
+          </div>
+          <button id="clearButton" class="clear-button" type="button">Clear</button>
+        </div>
+        <ol id="activity" class="activity-list" aria-live="polite">
+          <li class="empty-state">No mesh events yet.</li>
+        </ol>
+      </section>
+    </section>
+
+    <footer>
+      <span>Mobile integration boundary</span>
+      <code>MobileBleTransport</code>
+      <span>·</span>
+      <code>7f7d0002...4553</code>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
